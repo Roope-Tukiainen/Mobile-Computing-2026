@@ -1,0 +1,20 @@
+- How did you add an image and how did you adjust its size and shape?
+Image was added via Android Studio Resource Manager -> Import drawables, but I guess I could also just add my image to res/drawable/ folder directly. Once the image was added as a resource it can be drawn using ...foundation.Image function. The Image function has parameter modifier to which I gave Modifier object with size and clip(shape), which allowed me to change the size of the image and the clip cuts the image into given shape.
+
+- In what ways did you change text appearance? 
+I changed text appearance by color and style. Some layouts where text resides were given padding, shapes, and background color.
+
+- How did you make the content scrollable? 
+By using LazyColumn function, that only composes visible items and by default allows scrolling.
+
+- How do you register the user clicking on something? 
+Registering is handled by something's Modifier.clickable, where if the thing is clicked it will execute a given function and in this case it will change a boolean variable to switch between true and false.
+
+- How can you make that click cause a visible change?
+The boolean variable must be registered to Jetpack Compose via remember {mutableStateOf(boolean)}, so that when click is registered and updates the boolean value, Compose recomposes the affected composables therefore updating the UI.
+
+Overall I just followed the Jetpack Compose Tutorial with minimal change to examples. I did play around a bit with sizes and colors, and searched up why sometimes var or val was used for variable declaration. Also searched what "by" keyword did and what differences there are between class, data class, and object.
+Also I feel like there is a tons of different things to memorize to change the UI as there seems to be it's own package/function for almost everything.
+
+Github: https://github.com/Roope-Tukiainen/Mobile-Computing-2026
+Folder HW1.
