@@ -1,0 +1,16 @@
+ - What are the essential parts for implementing navigation?
+navController, NavHost, routes, and buttons that command the navController to navigate. Unless you want to manually edit XML and graphs.
+
+You can define routes for destinations in NavHost, and then navController can be used to navigate between these routes and implement backtrack control via popUpTo. Of course something must call the navController's navigate function with valid route, which can be implemented by setting components' onClick handler as the navController calls.
+
+
+- Circular backstack
+popUpTo(), use it to empty stack till last time the state was visited to prevent loops. E.g. A->B->C->D->A; popUpTo(A){inclusive = true} when moving from D to A would make the stack have only the last destination A. This scheme prevents all loops by removing all previous destinations up to the destination if we are entering destination that has been previously visited, however it also prevents the user from going back to D from A with the example backstack using back gesture. This also makes it so that if the user used back gesture on the first destination (main screen) the app closes.
+Destination history --> Final destination backstack
+A->B->C->B; --> A->B
+A->B->B->C->D->C; --> A->B->C
+
+I implemented two destinations and their routes, then a navigation bar on the bottom of the app, which has buttons for navigating between the destinations. Then used the scheme described in Circular backstack to keep the backstack free of loops and I have set my main screen as the start destination, which effectively makes the back gesture to close the app only from the main screen. The navigation bar checks the current backstack route to see which button on the navigation bar should be highlighted.
+
+Github: https://github.com/Roope-Tukiainen/Mobile-Computing-2026#
+Folder: HW2
