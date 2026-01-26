@@ -1,0 +1,16 @@
+- How did you implement picking an image?
+Made a launcher via rememberLauncherForActivityResult with contract: ActivityResultContracts.PickVisualMedia(). I added clickable handler to the profile image, which launches the PickVisualMedia. Once user has picked an image, the image's uri is stored as a string to a Preference dataStore and I give the app persisting permission to load that uri, because otherwise AsyncImage/AsyncImagePainter can't load the image by uri. 
+At first only a temporary permission was given by PickVisualMedia, which resulted in a bug that even though correct uri was used and loaded from dataStore, but because the app didn't have permission to load that uri after restart --> AsyncImage loaded a blank white image instead of the correct image.
+
+- How did you implement text input?
+I made an Inputfield or specifically used an OutlinedTextField with onValueChange handler set to change user's name to the text that is on the OutlinedTextField.
+
+- How can you store the data such that the application can display - your chosen image and text even when you change views or restart - the application? 
+I used Preference dataStore to store key:value pairs so that they persist even after the app is closed. Then I used remember and rememberSaveable to register variables such as username or image-uri so that once those change, the app knows which components need to be recomposed to reflect that change.
+
+- What is good way to store the image such it can be loaded as soon - as the app starts?
+Well assuming the image is already stored in storage somewhere, it's a good idea to save only the file-path (uri in my case) to that image so that there won't be any unnecessary copies of the image. You can then read the image with necessary functions that ultimately at some point read the image-file with the given file-path.
+
+
+Github: https://github.com/Roope-Tukiainen/Mobile-Computing-2026#
+Folder: HW3
